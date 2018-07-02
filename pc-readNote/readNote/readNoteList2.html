@@ -14,29 +14,35 @@
     <script type="text/javascript" src="js/topjui.config.js"></script>
 	<!-- TopJUI框架核心-->
     <script type="text/javascript" src="js/topjui.core.min.js"></script>
+    <script>
+		var url="http://127.0.0.1:8080/last_1/getReadNoteList.do";
+		var data={teacherName:"wgt"};
+		var res={};
+		$.ajax({ 
+			url: url,
+			data:data,
+			async:false,
+			dataType:'json',
+			success: function(res){
+				res=res;
+		    },
+		    error:function(XMLHttpRequest, textStatus, errorThrown){
+		    	debugger;
+		    	alert(errorThrown);
+		    }
+		});
+    </script>
 </head>
 <body>
 	
-	<table id="dg"></table>
+	<table id="productDg"></table>
 	<!-- 表格工具栏开始 -->
 	<div id="dg-toolbar" class="topjui-toolbar"
 	     data-options="grid:{
 	           type:'datagrid',
 	           id:'productDg'
 	       }">
-	    <a href="javascript:void(0)"
-	       data-toggle="topjui-menubutton"
-	       data-options="method:'openDialog',
-	       extend: '#productDg-toolbar',
-	       iconCls: 'fa fa-plus',
-	       dialog:{
-	           id:'userAddDialog',
-	           title:'多选项卡布局的表单',
-	           href:_ctx + '/html/complex/dialog_add.html',
-	           buttonsGroup:[
-	               {text:'保存',url:_ctx + '/json/response/success.json',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
-	           ]
-	       }">新增</a>
+	    <a>新增</a>
 	    
 	    
 	    <form id="queryForm" class="search-box">
@@ -60,22 +66,19 @@
 		//
 		//
 		//
-		var url="http://127.0.0.1:8080/last_1/getReadNoteList.do";
-		var data={teacherName:"wgt"};
-		$.ajax({ 
-			url: url,
-			data:data,
-			dataType:'jsonp',
-			success: function(res){
-				debugger;
-		       alert(res);
-		    },
-		    error:function(XMLHttpRequest, textStatus, errorThrown){
-		    	debugger;
-		    	alert(errorThrown);
-		    }
-		});
-
+		//
+		//
+		
+		$('#productDg').iDatagrid({
+					url:'http://127.0.0.1:8080/last_1/getReadNoteList.do',
+				    // data:res.rows,
+				    columns:[[
+				        {field:'chapterNo',title:'序号',width:100},
+				        {field:'noteName',title:'书籍名',width:100},
+				        {field:'teacherName',title:'讲师',width:100},
+				        {field:'noteSummary',title:'摘要',width:100,align:'right'}
+				    ]]
+				});
 
 		// $('#queryForm').click(function(){
 			/*var url="127.0.0.1:8080/last_1/getReadNoteList.do";
