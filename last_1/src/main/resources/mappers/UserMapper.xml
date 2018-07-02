@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="note.dao.UserDao">
+<select id="findUserByName" parameterType="string" resultType="note.entity.User">
+	select 
+		cn_user_id id,
+		cn_user_name name,
+		cn_user_password password,
+		cn_user_token token,
+		cn_user_nick nick
+	from
+		cn_user
+	where
+		cn_user_name=#{=_=!}
+</select>
+	<select id="findUserById" parameterType="string" resultType="note.entity.User">
+	select 
+		cn_user_id id,
+		cn_user_name name,
+		cn_user_password password,
+		cn_user_token token,
+		cn_user_nick nick
+	from
+		cn_user
+	where
+		cn_user_id=#{=_=!}
+</select>
+	
+</mapper>

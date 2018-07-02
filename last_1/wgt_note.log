@@ -1,0 +1,109 @@
+时间：2016-12-07 04:29:21执行了List note.service.JoinNoteService.findAllJoinNote(String)方法,耗时429475毫秒
+时间：2016-12-07 04:29:28执行了List note.service.ActivityService.findAllActivity()方法,耗时9923毫秒
+时间：2016-12-07 04:29:30执行了List note.service.JoinNoteService.findAllJoinNote(String)方法,耗时6754毫秒
+时间：2016-12-07 04:29:36执行了List note.service.ActivityService.findAllActivity()方法,耗时15403毫秒
+时间：2016-12-07 04:29:39执行了List note.service.NotebookService.showNotebooks(String,Integer,int)方法,耗时70955毫秒
+时间：2016-12-07 04:29:40执行了List note.service.JoinNoteService.findUserJoinNotes(String)方法,耗时11984毫秒
+时间：2016-12-07 04:29:41执行了List note.service.NoteService.showNotes(String,int,String,String)方法,耗时3927毫秒
+时间：2016-12-07 04:29:43执行了List note.service.NoteService.showNotes(String,int,String,String)方法,耗时3300毫秒
+时间：2016-12-07 04:31:03执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),耗时954585毫秒
+时间：2016-12-07 04:31:03执行了  方法：List note.service.JoinNoteService.findUserJoinNotes(String),耗时942308毫秒
+时间：2016-12-07 04:31:09执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),耗时6924毫秒
+时间：2016-12-07 04:31:10执行了  方法：List note.service.ActivityService.findAllActivity(),耗时29652毫秒
+时间：2016-12-07 04:31:12执行了  方法：List note.service.JoinNoteService.findAllJoinNote(String),耗时6843毫秒
+时间：2016-12-07 04:31:14执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),耗时4340毫秒
+时间：2016-12-07 04:31:15执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),耗时3897毫秒
+时间：2016-12-07 04:33:17执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时467701毫秒
+时间：2016-12-07 04:33:19执行了  方法：List note.service.JoinNoteService.findAllJoinNote(String),
+耗时8863毫秒
+时间：2016-12-07 04:33:22执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时112817毫秒
+时间：2016-12-07 04:33:23执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时4413毫秒
+时间：2016-12-07 04:33:23执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时2861毫秒
+时间：2016-12-07 04:33:26执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时12938毫秒
+时间：2016-12-07 04:33:28执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时2609毫秒
+时间：2016-12-07 04:33:30执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时3165毫秒
+时间：2016-12-07 04:33:31执行了  方法：List note.service.JoinNoteService.findUserJoinNotes(String),
+耗时9481毫秒
+时间：2016-12-11 04:55:07执行了  方法：User note.service.UserService.login(String,String),
+耗时462972毫秒
+时间：2016-12-11 04:55:08执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时120424毫秒
+时间：2016-12-11 04:55:35执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时53045毫秒
+时间：2016-12-11 04:55:37执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时4029毫秒
+时间：2016-12-11 04:55:38执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时3108毫秒
+时间：2016-12-11 04:55:40执行了  方法：List note.service.JoinNoteService.findUserJoinNotes(String),
+耗时8315毫秒
+时间：2016-12-11 04:55:42执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时37134毫秒
+时间：2016-12-11 04:55:47执行了  方法：List note.service.JoinNoteService.findAllJoinNote(String),
+耗时3544毫秒
+时间：2016-12-11 04:55:59执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时3657毫秒
+时间：2016-12-11 04:56:00执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时2875毫秒
+时间：2016-12-11 04:56:01执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时2805毫秒
+时间：2016-12-13 06:08:26执行了  方法：User note.service.UserService.login(String,String),
+耗时542157毫秒
+时间：2016-12-13 06:08:27执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时104009毫秒
+时间：2016-12-13 06:08:37执行了  方法：User note.service.UserService.login(String,String),
+耗时3990毫秒
+时间：2016-12-13 06:08:37执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时2086毫秒
+时间：2016-12-13 06:08:39执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时52197毫秒
+时间：2016-12-13 06:08:41执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时4638毫秒
+时间：2016-12-13 06:08:41执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时13469毫秒
+时间：2016-12-13 06:08:47执行了  方法：boolean note.service.NoteService.toRollback(String),
+耗时40993毫秒
+时间：2016-12-13 06:08:48执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时12290毫秒
+时间：2016-12-13 06:08:52执行了  方法：List note.service.JoinNoteService.findUserJoinNotes(String),
+耗时38887毫秒
+时间：2016-12-13 06:09:00执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时53979毫秒
+时间：2016-12-13 06:09:02执行了  方法：List note.service.JoinNoteService.findAllJoinNote(String),
+耗时26626毫秒
+时间：2016-12-13 06:09:06执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时6590毫秒
+时间：2016-12-13 06:09:07执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时11130毫秒
+时间：2016-12-13 06:09:11执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时9338毫秒
+时间：2016-12-13 06:09:13执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时3173毫秒
+时间：2016-12-24 06:42:59执行了  方法：User note.service.UserService.login(String,String),
+耗时483911毫秒
+时间：2016-12-24 06:43:00执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时91122毫秒
+时间：2016-12-24 06:43:02执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时57605毫秒
+时间：2016-12-24 06:43:05执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时21498毫秒
+时间：2016-12-24 06:43:07执行了  方法：List note.service.JoinNoteService.findUserJoinNotes(String),
+耗时23674毫秒
+时间：2016-12-24 06:43:08执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时39243毫秒
+时间：2016-12-24 06:43:11执行了  方法：List note.service.JoinNoteService.findAllJoinNote(String),
+耗时4284毫秒
+时间：2016-12-24 06:43:14执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时5723毫秒
+时间：2016-12-24 06:43:14执行了  方法：List note.service.NoteService.showNotes(String,int,String,String),
+耗时5682毫秒
+时间：2016-12-24 06:43:17执行了  方法：List note.service.ActivityService.findAllActivity(),
+耗时8590毫秒
+时间：2016-12-24 06:43:18执行了  方法：List note.service.NotebookService.showNotebooks(String,Integer,int),
+耗时2058毫秒

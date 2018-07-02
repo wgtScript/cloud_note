@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="note.dao.JoinNoteDao">
+	<select id="findNoteByActivityId" parameterType="int" resultMap="noteJoin">
+	select 
+		*
+	from
+		cn_note_activity
+	where 
+		cn_activity_id=#{^-^}
+	
+	</select>
+		<resultMap type="note.entity.JoinNote" id="noteJoin">
+			<id property="id" column="cn_note_activity_id"></id>
+			<result property="activityId" column="cn_activity_id"></result>
+			<result property="noteId" column="cn_note_id"></result>
+			<result property="up" column="cn_note_activity_up"></result>
+			<result property="down" column="cn_note_activity_down"></result>
+			<result property="title" column="cn_note_activity_title"></result>
+			<result property="body" column="cn_note_activity_body"></result>
+		</resultMap>
+ <insert id="addJoinNote" parameterType="map">
+	insert into 
+		cn_note_activity
+	values(#{id},
+			#{activityId},
+			#{noteId},
+			#{up},
+			#{down},
+			#{title},
+			#{body}
+	)
+</insert>		
+<select id="findNotesByUserId" resultType="map" parameterType="string">
+	select 
+		n.cn_note_title title,
+		n.cn_note_body body,
+		n.cn_note_id noteId
+	from 
+		cn_note n,cn_note_activity a
+	where n.cn_note_id=a.cn_note_id
+		and n.cn_user_id=#{-_-}
+
+</select>
+
+
+
+	
+</mapper>

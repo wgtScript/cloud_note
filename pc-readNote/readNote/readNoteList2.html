@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>笔记列表</title>
+	<!-- TopJUI框架样式 -->
+    <link type="text/css" href="css/topjui.core.min.css" rel="stylesheet">
+    <link type="text/css" href="css/topjui.blue.css" rel="stylesheet" id="dynamicTheme"/>
+    <!-- FontAwesome字体图标 -->
+    <link type="text/css" href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+	<!-- jQuery相关引用 -->
+    <script type="text/javascript" src="static/plugins/jquery/jquery.min.js"></script>
+
+	<!-- TopJUI框架配置 -->
+    <script type="text/javascript" src="js/topjui.config.js"></script>
+	<!-- TopJUI框架核心-->
+    <script type="text/javascript" src="js/topjui.core.min.js"></script>
+</head>
+<body>
+	
+	<table id="dg"></table>
+	<!-- 表格工具栏开始 -->
+	<div id="dg-toolbar" class="topjui-toolbar"
+	     data-options="grid:{
+	           type:'datagrid',
+	           id:'productDg'
+	       }">
+	    <a href="javascript:void(0)"
+	       data-toggle="topjui-menubutton"
+	       data-options="method:'openDialog',
+	       extend: '#productDg-toolbar',
+	       iconCls: 'fa fa-plus',
+	       dialog:{
+	           id:'userAddDialog',
+	           title:'多选项卡布局的表单',
+	           href:_ctx + '/html/complex/dialog_add.html',
+	           buttonsGroup:[
+	               {text:'保存',url:_ctx + '/json/response/success.json',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
+	           ]
+	       }">新增</a>
+	    
+	    
+	    <form id="queryForm" class="search-box">
+	        <input type="text" name="name" data-toggle="topjui-textbox"
+	               data-options="id:'name',prompt:'产品名称',width:100">
+	        <input type="text" name="code" data-toggle="topjui-textbox"
+	               data-options="id:'code',prompt:'产品型号',width:100">
+	        <a href="javascript:void(0)"
+	           data-toggle="topjui-menubutton"
+	           data-options="method:'query',
+	           iconCls:'fa fa-search',
+	           btnCls:'topjui-btn-blue',
+	           form:{id:'queryForm'},
+	           grid:{type:'datagrid','id':'productDg'}">查询</a>
+	    </form>
+	</div>
+
+	<script>
+		//点击搜索
+		//
+		//
+		//
+		//
+		var url="http://127.0.0.1:8080/last_1/getReadNoteList.do";
+		var data={teacherName:"wgt"};
+		$.ajax({ 
+			url: url,
+			data:data,
+			dataType:'jsonp',
+			success: function(res){
+				debugger;
+		       alert(res);
+		    },
+		    error:function(XMLHttpRequest, textStatus, errorThrown){
+		    	debugger;
+		    	alert(errorThrown);
+		    }
+		});
+
+
+		// $('#queryForm').click(function(){
+			/*var url="127.0.0.1:8080/last_1/getReadNoteList.do";
+			var data={teacherName:"wgt"};
+
+			 $.getJSON(url,data,function(res){
+			 	debugger;
+			 	$('#dg').iDatagrid({
+			 	toolbar: '#tb',	
+		    	data:res.rows,
+			    columns:[[
+				        {field:'chapterNo',title:'序号',width:100},
+				        {field:'noteName',title:'书籍名',width:100},
+				        {field:'teacherName',title:'讲师',width:100},
+				        {field:'noteSummary',title:'摘要',width:100,align:'right'}
+				    ]]
+				});
+			 });
+
+*/
+		// });
+
+		// $('#queryForm').click();
+	</script>
+</body>
+</html>
