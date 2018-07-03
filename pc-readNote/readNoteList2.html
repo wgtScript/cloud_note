@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>笔记列表</title>
+	<meta charset="utf-8"></meta>
 	<!-- TopJUI框架样式 -->
     <link type="text/css" href="css/topjui.core.min.css" rel="stylesheet">
     <link type="text/css" href="css/topjui.blue.css" rel="stylesheet" id="dynamicTheme"/>
@@ -10,6 +11,13 @@
 
     <!-- layui框架样式 -->
     <link type="text/css" href="css/layui.css" rel="stylesheet"/>
+	
+	<!---  添加页面相关  -->
+	<!-- <link rel="stylesheet" href="css/bootstrap.css" /> -->
+	<script charset="utf-8" src="js/kindeditor-min.js"></script>
+	<script charset="utf-8" src="lang/zh_CN.js"></script>
+
+
 	<!-- jQuery相关引用 -->
     <script type="text/javascript" src="static/plugins/jquery/jquery.min.js"></script>
 
@@ -19,7 +27,7 @@
     <script type="text/javascript" src="js/topjui.core.min.js"></script>
     <script>
 		//var url="http://127.0.0.1:8080/last_1/getReadNoteList.do";
-		var url="http://192.168.1.232:8081/last_1/getReadNoteList.do";
+		/*var url="http://192.168.1.232:8081/last_1/getReadNoteList.do";
 		
 		var data={teacherName:"wgt"};
 		var res={};
@@ -35,7 +43,7 @@
 		    	debugger;
 		    	alert(errorThrown);
 		    }
-		});
+		});*/
     </script>
 </head>
 <body>
@@ -54,10 +62,10 @@
 	       iconCls: 'fa fa-plus',
 	       dialog:{
 	           id:'userAddDialog',
-	           title:'多选项卡布局的表单',
-	           href:_ctx + '/html/complex/dialog_add.html',
+	           title:'新增笔记',
+	           href:'addReadNote.html',
 	           buttonsGroup:[
-	               {text:'保存',url:_ctx + '/json/response/success.json',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
+	               {text:'保存',url:'http://127.0.0.1:8081/last_1/addReadNote.do',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
 	           ]
 	       }">新增</a>
 	    
@@ -90,6 +98,11 @@
 					url:'http://127.0.0.1:8081/last_1/getReadNoteList.do',
 					toolbar: '#productDg-toolbar',
 				    // data:res.rows,
+				    singleSelect: false,
+		            checkOnSelect: true,
+		            selectOnCheck: true,
+		            pagination:true,
+		            fitColumns:true,
 				    columns:[[
 				        {field:'chapterNo',title:'序号',width:100},
 				        {field:'noteName',title:'书籍名',width:100},
