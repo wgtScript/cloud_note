@@ -11,8 +11,13 @@ public class JsonResult<T> implements Serializable{
 	private T data;
 	private String message;
 	
+	//topjui  列表页
 	private T rows;
 	private int total;
+	
+	//topjui ajax返回   还有个messge
+	private int statusCode;
+	private String title;
 	
 	private int totalPage;
 	private int currentPage;
@@ -42,7 +47,13 @@ public class JsonResult<T> implements Serializable{
 		this.data=data;
 		this.message="";
 	}
+	public JsonResult(int statusCode,String title,String message) {
+		this.statusCode=statusCode;
+		this.title=title;
+		this.message=message;
+	}
 	
+	//返回列表
 	public JsonResult(T rows,int total) {
 		this.rows=rows;
 		this.total=total;
@@ -80,6 +91,22 @@ public class JsonResult<T> implements Serializable{
 	
 	
 	
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public int getState() {
 		return state;
 	}
@@ -197,34 +224,7 @@ public class JsonResult<T> implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "JsonResult [state=" + state + ", data=" + data + ", message=" + message + ", rows=" + rows + ", total="
-				+ total + ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", numPerPage=" + numPerPage
-				+ ", nextPage=" + nextPage + ", previousPage=" + previousPage + ", firstPage=" + firstPage
-				+ ", lastPage=" + lastPage + ", hasPreviousPage=" + hasPreviousPage + ", hasNextPage=" + hasNextPage
-				+ "]";
-	}
-
-	public JsonResult(int state, T data, String message, T rows, int total, int totalPage, int currentPage,
-			int numPerPage, int nextPage, int previousPage, boolean firstPage, boolean lastPage,
-			boolean hasPreviousPage, boolean hasNextPage) {
-		super();
-		this.state = state;
-		this.data = data;
-		this.message = message;
-		this.rows = rows;
-		this.total = total;
-		this.totalPage = totalPage;
-		this.currentPage = currentPage;
-		this.numPerPage = numPerPage;
-		this.nextPage = nextPage;
-		this.previousPage = previousPage;
-		this.firstPage = firstPage;
-		this.lastPage = lastPage;
-		this.hasPreviousPage = hasPreviousPage;
-		this.hasNextPage = hasNextPage;
-	}
+	
 
 	
 	

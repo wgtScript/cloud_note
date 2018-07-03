@@ -8,7 +8,7 @@
 		<result column="chapter_no" property="chapterNo" jdbcType="VARCHAR" />
 		<result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
 		<result column="note_summary" property="noteSummary" jdbcType="VARCHAR" />
-		<result column="note_content" property="noteContent" jdbcType="VARCHAR" />
+		<result column="note_content" property="noteContent" jdbcType="LONGVARCHAR" />
 		<result column="note_name" property="noteName" jdbcType="VARCHAR" />
 		
 		<result column="create_by" property="createBy" jdbcType="BIGINT" />
@@ -26,7 +26,8 @@
 		FROM
 			read_note
 		WHERE
-			enable_ = 1
+			<!-- enable_ = 1 -->
+			1=1
 		<if test="teacherName!=null">
 			and teacher_name like #{teacherName}
 		</if>
@@ -43,6 +44,18 @@
 		limit #{start},#{rows}
 		</if>	
 	</select>
-	
+
+	<insert id="addReadNote" parameterType="map">
+		insert into 
+			read_note
+		values( null,
+				#{chapterNo},
+				#{teacherName},
+				#{noteName},
+				#{noteSummary},
+				#{noteContent},
+				null,null,null,null,null,null
+		)
+	</insert>		
 	
 </mapper>

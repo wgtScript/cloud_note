@@ -56,10 +56,21 @@
 	<context:component-scan base-package="note.service"></context:component-scan>
 	<context:component-scan base-package="readNote.controller"></context:component-scan>	
 	<context:component-scan base-package="readNote.service"></context:component-scan>
-	
 	<context:component-scan base-package="note.aop"></context:component-scan>
 	<aop:aspectj-autoproxy/>  
 	 
+
+	 <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+        >
+		<property name="dataSource" ref="ds"></property>
+	</bean>
+    <!-- 指明使用注解的方式来管理事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
 	 <!-- <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	 	
 	 </bean> -->

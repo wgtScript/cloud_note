@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import readNote.mapper.ReadNoteMapper;
 import readNote.vo.ReadNote;
@@ -32,5 +33,23 @@ public class ReadNoteServiceImpl implements ReadNoteService{
 		pageInfo.put("rows", rows);
 		return readNoteMapper.getReadNoteList(pageInfo);
 		
+	}
+	@Transactional
+	public int addReadNote(String chapterNo, String teacherName, String noteName, String noteSummary, String noteContent) {
+		Map<String, Object> readNote=new HashMap<String, Object>();
+		readNote.put("chapterNo", chapterNo);
+		readNote.put("teacherName", teacherName);
+		readNote.put("noteName", noteName);
+		readNote.put("noteSummary", noteSummary);
+		readNote.put("noteContent", noteContent);
+		
+		/*ReadNote readNote =new ReadNote();
+		readNote.setChapterNo(chapterNo);
+		readNote.setTeacherName(teacherName);
+		readNote.setNoteName(noteName);
+		readNote.setNoteSummary(noteSummary);
+		readNote.setNoteContent(noteContent);
+		return readNoteMapper.insert(readNote);*/
+		return readNoteMapper.addReadNote(readNote);
 	}
 }
