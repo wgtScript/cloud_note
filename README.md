@@ -23,3 +23,12 @@
 	html <meta charset="utf-8"></meta>
 9、文本编辑器没有初始化进入 KindEditor.ready()方法。
 	改用另一种方式初始化。
+10、直接用topjui的富文本编辑器，UEditor
+11、mybatis   test 字段判空
+	<if test="id!=null and id != ''">
+		and id_ = #{id}
+	</if>
+#需求
+1、待买物品（每月都买点粮食）
+2、待学知识（吉他、看书）-->读书笔记
+3、代办事项（每月任务） 
