@@ -23,4 +23,12 @@ public interface ReadNoteService {
 	 */
 	public int addReadNote(String chapterNo,String teacherName,
 			String noteName,String noteSummary,String content);
+	
+	/**
+	 * 获取笔记
+	 * @param id
+	 * @return
+	 */
+	public ReadNote getReadNote(Integer id);
+	
 }

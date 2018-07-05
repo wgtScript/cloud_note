@@ -52,4 +52,9 @@ public class ReadNoteServiceImpl implements ReadNoteService{
 		return readNoteMapper.insert(readNote);*/
 		return readNoteMapper.addReadNote(readNote);
 	}
+	public ReadNote getReadNote(Integer id) {
+		Map<String, Object> pageInfo=new HashMap<String, Object>();
+		pageInfo.put("id", id);
+		return readNoteMapper.getReadNoteList(pageInfo).get(0);
+	}
 }

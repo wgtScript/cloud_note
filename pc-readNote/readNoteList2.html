@@ -13,7 +13,7 @@
     <link type="text/css" href="css/layui.css" rel="stylesheet"/>
 	
 	<!---  添加页面相关  -->
-	<!-- <link rel="stylesheet" href="css/bootstrap.css" /> -->
+	<link rel="stylesheet" href="css/bootstrap.css" />
 	<script charset="utf-8" src="js/kindeditor-min.js"></script>
 	<script charset="utf-8" src="lang/zh_CN.js"></script>
 
@@ -44,7 +44,12 @@
 		    	alert(errorThrown);
 		    }
 		});*/
-    </script>
+	</script>
+	<style>
+		.panel-body {padding: 0;}
+		.datagrid-cell-rownumber{overflow:visible}
+	</style>
+
 </head>
 <body>
 	
@@ -63,12 +68,13 @@
 	       dialog:{
 	           id:'userAddDialog',
 	           title:'新增笔记',
-	           href:'addReadNote.html',
+	           href:'addReadNote2.html',
 	           buttonsGroup:[
 	               {text:'保存',url:'http://127.0.0.1:8081/last_1/addReadNote.do',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
 	           ]
 	       }">新增</a>
-	    
+		<a id="edit">编辑</a>
+		<a id="detail">详情</a>
 	    
 	    <form id="queryForm" class="search-box">
 	        <input type="text" name="name" data-toggle="topjui-textbox"
@@ -86,53 +92,42 @@
 	</div>
 
 	<script>
-		//点击搜索
-		//
-		//
-		//
-		//
-		//
-		//
+		
 		
 		$('#productDg').iDatagrid({
-					url:'http://127.0.0.1:8081/last_1/getReadNoteList.do',
-					toolbar: '#productDg-toolbar',
-				    // data:res.rows,
-				    singleSelect: false,
-		            checkOnSelect: true,
-		            selectOnCheck: true,
-		            pagination:true,
-		            fitColumns:true,
-				    columns:[[
-				        {field:'chapterNo',title:'序号',width:100},
-				        {field:'noteName',title:'书籍名',width:100},
-				        {field:'teacherName',title:'讲师',width:100},
-				        {field:'noteSummary',title:'摘要',width:100,align:'right'}
-				    ]]
-				});
+			url:'http://127.0.0.1:8081/last_1/getReadNoteList.do',
+			toolbar: '#productDg-toolbar',
+			// data:res.rows,
+			singleSelect: false,
+			checkOnSelect: true,
+			selectOnCheck: true,
+			pagination:true, 
+			fitColumns:true,
+			columns:[[
+				{field:'id',title:'id',checkbox:true},
+				{field:'chapterNo',title:'序号',width:100},
+				{field:'noteName',title:'书籍名',width:100},
+				{field:'teacherName',title:'讲师',width:100},
+				{field:'noteSummary',title:'摘要',width:100,align:'right'}
+			]]
+		});
 
-		// $('#queryForm').click(function(){
-			/*var url="127.0.0.1:8080/last_1/getReadNoteList.do";
-			var data={teacherName:"wgt"};
+		$('#detail').iMenubutton({
+            //btnCls:'topjui-btn-purple',
+            iconCls:'fa fa-search',
+            method:'openDialog',
+			grid:{type:'datagrid','id':'productDg',multiCheck: 0,singleSelect: 1,uncheckedMsg: '请先选择数据'},
+            dialog:{
+               id:'detailDialog',
+               href:'readNoteDetail2.html',
+			   url:'http://127.0.0.1:8081/last_1/getReadNote2.do?id={id}',
+              
+               title:'笔记详情',
+               resizable:false,
+            }
+        });
 
-			 $.getJSON(url,data,function(res){
-			 	debugger;
-			 	$('#dg').iDatagrid({
-			 	toolbar: '#tb',	
-		    	data:res.rows,
-			    columns:[[
-				        {field:'chapterNo',title:'序号',width:100},
-				        {field:'noteName',title:'书籍名',width:100},
-				        {field:'teacherName',title:'讲师',width:100},
-				        {field:'noteSummary',title:'摘要',width:100,align:'right'}
-				    ]]
-				});
-			 });
-
-*/
-		// });
-
-		// $('#queryForm').click();
+		
 	</script>
 </body>
 </html>

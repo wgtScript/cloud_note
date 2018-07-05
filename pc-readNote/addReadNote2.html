@@ -43,19 +43,49 @@
 			<div class="form-group col-sm-11">
 				<label for="content" class="col-sm-2 control-label">笔记内容：	</label>
 				<div class="col-sm-10">
-					<textarea name="content" data-toggle="topjui-ueditor" data-options="id:'contentEditEditor',mode:'simple'"></textarea>
+					<textarea name="content" style="width:100%;height:400px;visibility:hidden;" ></textarea>
 				</div>
 			</div>
-			<!-- <div class="col-sm-12">
+			<div class="col-sm-12">
 				<div class="text-center">
 					<button class="btn  btn-success  btn-round" type="submit" id="" style="margin-top:20px;">
 						<i class="icon-check bigger-110"></i>
 						保存
 					</button>
 				</div>
-			</div> -->
+			</div>
 		
 		
-		
+		<script>
+			function kedit(kedit){
+				var editor = KindEditor.create(kedit,{
+					resizeMode: 0,
+					allowPreviewEmoticons: false,
+					afterCreate : function() {
+					　　this.sync();
+					　　},
+					　　afterBlur:function(){
+					　　this.sync();
+					　　},
+					items: [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+				});
+			}
+			kedit('textarea[name="content"]');
+			/*$('#ff').iForm({
+				url:'',
+				onSubmit: function(){
+					// do some check
+					// return false to prevent submit;
+				},
+				success:function(data){
+					alert(data)
+				}
+			});*/
+
+
+		</script>
 	</body>
 </html>

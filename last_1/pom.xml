@@ -74,13 +74,14 @@
 			<version>1.8.8</version>
 		</dependency>
 		<!-- <dependency> <groupId>tk.mybatis</groupId> <artifactId>mapper-spring-boot-starter</artifactId> 
-			<version>1.1.0</version>
-			</dependency> -->
-		<!-- <dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus</artifactId>
-			<version>2.3</version>
-		</dependency> -->
-	
+			<version>1.1.0</version> </dependency> -->
+		<!-- <dependency> <groupId>com.baomidou</groupId> <artifactId>mybatis-plus</artifactId> 
+			<version>2.3</version> </dependency> -->
+		<!--String工具类 -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.5</version>
+		</dependency>
 	</dependencies>
 </project>

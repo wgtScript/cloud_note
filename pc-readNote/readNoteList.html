@@ -2,29 +2,143 @@
 <html>
 <head>
 	<title>笔记列表</title>
+	<meta charset="utf-8"></meta>
+	<!-- TopJUI框架样式 -->
+    <link type="text/css" href="css/topjui.core.min.css" rel="stylesheet">
+    <link type="text/css" href="css/topjui.blue.css" rel="stylesheet" id="dynamicTheme"/>
+    <!-- FontAwesome字体图标 -->
+    <link type="text/css" href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- layui框架样式 -->
+    <link type="text/css" href="css/layui.css" rel="stylesheet"/>
+	
+	<!---  添加页面相关  -->
 	<link rel="stylesheet" href="css/bootstrap.css" />
+	<!-- <script charset="utf-8" src="js/kindeditor-min.js"></script>
+	<script charset="utf-8" src="lang/zh_CN.js"></script> -->
+
+
+	<!-- jQuery相关引用 -->
+    <script type="text/javascript" src="static/plugins/jquery/jquery.min.js"></script>
+
+	<!-- TopJUI框架配置 -->
+    <script type="text/javascript" src="js/topjui.config.js"></script>
+	<!-- TopJUI框架核心-->
+    <script type="text/javascript" src="js/topjui.core.min.js"></script>
+    <script>
+		//var url="http://127.0.0.1:8080/last_1/getReadNoteList.do";
+		/*var url="http://192.168.1.232:8081/last_1/getReadNoteList.do";
+		
+		var data={teacherName:"wgt"};
+		var res={};
+		$.ajax({ 
+			url: url,
+			data:data,
+			async:false,
+			dataType:'json',
+			success: function(res){
+				res=res;
+		    },
+		    error:function(XMLHttpRequest, textStatus, errorThrown){
+		    	debugger;
+		    	alert(errorThrown);
+		    }
+		});*/
+	</script>
+	<style>
+		.panel-body {padding: 0;}
+		.datagrid-cell-rownumber{overflow:visible}
+	</style>
+
 </head>
 <body>
-	<div class="container">
-		<h2>笔记列表</h2>    
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>序号</th>
-					<th>章节号</th>
-					<th>讲师</th>
-					<th>内容摘要</th>
-					<th>创建日期</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Anna</td>
-				</tr>
-				
-			</tbody>
-		</table>
+	
+	<table id="productDg"></table>
+	<!-- 表格工具栏开始 -->
+	<div id="productDg-toolbar" class="topjui-toolbar"
+	     data-options="grid:{
+	           type:'datagrid',
+	           id:'productDg'
+	       }">
+	    <a href="javascript:void(0)"
+	       data-toggle="topjui-menubutton"
+	       data-options="method:'openDialog',
+	       extend: '#productDg-toolbar',
+	       iconCls: 'fa fa-plus',
+	       dialog:{
+	           id:'userAddDialog',
+	           title:'新增笔记',
+			   href:'addReadNote.html',
+			   editor:[
+					{id:'contentAddEditor',field:'noteContent'}
+				],
+	           buttonsGroup:[ 
+	               {text:'保存',url:'http://127.0.0.1:8081/last_1/addReadNote.do',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
+	           ]
+	       }">新增</a>
+		<!-- <a id="edit">编辑</a> -->
+		<a id="detail">编辑</a>
+	    
+	    <form id="queryForm" class="search-box">
+	        <input type="text" name="teacherName" data-toggle="topjui-textbox"
+	               data-options="id:'teacherName',prompt:'讲师',width:100">
+	        <input type="text" name="noteName" data-toggle="topjui-textbox"
+				   data-options="id:'noteName',prompt:'书名',width:100">
+			<input type="text" name="noteSummary" data-toggle="topjui-textbox"
+	               data-options="id:'noteSummary',prompt:'内容摘要',width:100">
+	        <a href="javascript:void(0)"
+	           data-toggle="topjui-menubutton"
+	           data-options="method:'query',
+	           iconCls:'fa fa-search',
+	           btnCls:'topjui-btn-blue',
+	           form:{id:'queryForm'},
+	           grid:{type:'datagrid','id':'productDg'}">查询</a>
+	    </form>
 	</div>
+
+	<script>
+		
+		
+		$('#productDg').iDatagrid({
+			url:'http://127.0.0.1:8081/last_1/getReadNoteList.do',
+			toolbar: '#productDg-toolbar',
+			// data:res.rows,
+			singleSelect: false,
+			checkOnSelect: true,
+			selectOnCheck: true,
+			pagination:true, 
+			fitColumns:true,
+			singleSelect:true,
+			columns:[[
+				{field:'id',title:'id',checkbox:true},
+				{field:'chapterNo',title:'序号',width:100},
+				{field:'noteName',title:'书名',width:100},
+				{field:'teacherName',title:'讲师',width:100},
+				{field:'noteSummary',title:'摘要',width:100,align:'right'}
+			]]
+		});
+
+		$('#detail').iMenubutton({
+            //btnCls:'topjui-btn-purple',
+            iconCls:'fa fa-search',
+            method:'openDialog',
+			grid:{type:'datagrid','id':'productDg',multiCheck: 0,singleSelect: 1,uncheckedMsg: '请先选择数据'},
+            dialog:{
+               id:'detailDialog',
+               href:'readNoteDetail.html',
+			   url:'http://127.0.0.1:8081/last_1/getReadNote2.do?id={id}',
+               editor:[
+					{id:'contentAddEditor',field:'noteContent'}
+				],
+               title:'笔记详情',
+               resizable:false,
+            }
+        });
+
+		
+	</script>
+	<!-- Ueditor编辑器插件 -->
+	<script type="text/javascript" src="static/plugins/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="static/plugins/ueditor/ueditor.all.min.js"></script>
 </body>
 </html>

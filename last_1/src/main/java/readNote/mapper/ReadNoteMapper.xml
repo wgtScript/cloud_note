@@ -28,19 +28,22 @@
 		WHERE
 			<!-- enable_ = 1 -->
 			1=1
-		<if test="teacherName!=null">
+		<if test="id!=null and id != ''">
+			and id_ = #{id}
+		</if>
+		<if test="teacherName!=null and teacherName != ''">
 			and teacher_name like #{teacherName}
 		</if>
-		<if test="noteName!=null">
+		<if test="noteName!=null and noteName != ''">
 			and note_name like #{noteName}
 		</if>
-		<if test="noteSummary!=null">
+		<if test="noteSummary!=null and noteSummary != ''">
 			and note_summary like #{noteSummary}
 		</if>
-		<if test="chapterNo!=null">
+		<if test="chapterNo!=null and chapterNo != ''">
 			and chapter_no like #{chapterNo}
 		</if>
-		<if test="start!=null">
+		<if test="start!=null and start != ''">
 		limit #{start},#{rows}
 		</if>	
 	</select>
