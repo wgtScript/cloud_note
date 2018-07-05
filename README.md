@@ -23,6 +23,9 @@
 	html <meta charset="utf-8"></meta>
 9、文本编辑器没有初始化进入 KindEditor.ready()方法。
 	改用另一种方式初始化。
+	
+10、回宿舍tomcat端口都+1，保持两边一致。  都是8081。
+11、把Nginx的文件夹也放到git里面，然后检出时，目录选择E盘就可以了。
 10、直接用topjui的富文本编辑器，UEditor
 11、mybatis   test 字段判空
 	<if test="id!=null and id != ''">
