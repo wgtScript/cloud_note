@@ -3,9 +3,11 @@ package readNote.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+
 import readNote.vo.ReadNote;
 
-public interface ReadNoteMapper {
+public interface ReadNoteMapper extends BaseMapper<ReadNote>{
 	/**
 	 * 获取笔记列表
 	 */

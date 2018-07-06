@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+
 import readNote.mapper.ReadNoteMapper;
 import readNote.vo.ReadNote;
 
@@ -24,6 +26,11 @@ public class ReadNoteServiceImpl implements ReadNoteService{
 	public List<ReadNote> getReadNoteList(Integer start,
 			Integer rows,String chapterNo,String teacherName,
 			String noteName,String noteSummary) {
+		
+		// 查询姓名为‘张三’的所有用户记录
+/*		List<ReadNote> userList = readNoteMapper.selectList(new EntityWrapper<ReadNote>().eq("id_", "5"));
+		
+		return userList;*/
 		Map<String, Object> pageInfo=new HashMap<String, Object>();
 		pageInfo.put("teacherName", teacherName);
 		pageInfo.put("noteName", noteName);
@@ -36,23 +43,28 @@ public class ReadNoteServiceImpl implements ReadNoteService{
 	}
 	@Transactional
 	public int addReadNote(String chapterNo, String teacherName, String noteName, String noteSummary, String noteContent) {
-		Map<String, Object> readNote=new HashMap<String, Object>();
+		/*Map<String, Object> readNote=new HashMap<String, Object>();
 		readNote.put("chapterNo", chapterNo);
 		readNote.put("teacherName", teacherName);
 		readNote.put("noteName", noteName);
 		readNote.put("noteSummary", noteSummary);
 		readNote.put("noteContent", noteContent);
-		
-		/*ReadNote readNote =new ReadNote();
+		return readNoteMapper.addReadNote(readNote);*/
+		int result=0;
+		ReadNote readNote =new ReadNote();
 		readNote.setChapterNo(chapterNo);
 		readNote.setTeacherName(teacherName);
 		readNote.setNoteName(noteName);
 		readNote.setNoteSummary(noteSummary);
 		readNote.setNoteContent(noteContent);
-		return readNoteMapper.insert(readNote);*/
-		return readNoteMapper.addReadNote(readNote);
+		try {
+			result=readNoteMapper.insert(readNote);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
-	public ReadNote getReadNote(Integer id) {
+	public ReadNote getReadNote(Long id) {
 		Map<String, Object> pageInfo=new HashMap<String, Object>();
 		pageInfo.put("id", id);
 		return readNoteMapper.getReadNoteList(pageInfo).get(0);

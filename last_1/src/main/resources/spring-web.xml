@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" 
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
-	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
@@ -19,62 +19,138 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-	
+
 	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/cloud_note?characterEncoding=utf8"></property>
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/cloud_note?characterEncoding=utf8&amp;useSSL=false"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
 	</bean>
-	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="ds"></property>
-		<!-- <property name="mapperLocations" value="classpath:mappers/*.xml"></property> -->
-		<property name="mapperLocations" >
-            <list>
-                <value>classpath:mappers/*.xml</value>
-                <value>classpath*:**/mapper/*.xml</value>
-            </list>
-        </property>
-		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	<!-- <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"> <property 
+		name="dataSource" ref="ds"></property> <property name="mapperLocations" value="classpath:mappers/*.xml"></property> 
+		<property name="mapperLocations" > <list> <value>classpath:mappers/*.xml</value> 
+		<value>classpath*:**/mapper/*.xml</value> <value>classpath*:**/*Mapper.xml</value> 
+		</list> </property> <property name="configLocation" value="classpath:mybatis-config.xml"></property> 
+		</bean> -->
+	<!-- <bean id="msf" class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+		<property name="sqlSessionFactory" ref="ssf"></property> <property name="basePackage" 
+		value="note.dao,readNote.mapper"></property> </bean> -->
+
+
+	<bean id="sqlSessionFactory"
+		class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+		<!-- 配置实体扫描路径，多个package可以用分号; 逗号, 分隔， 支持通配符* -->
+		<!-- com.a.b.entity;com.a.c.entity;com.d.*.entity -->
+		<property name="typeAliasesPackage"
+			value="com.baomidou.mybatisplus.test.h2.entity,readNote.vo" />
+		<property name="configuration" ref="mybatisConfig" />
+		<!-- MP 全局配置注入 -->
+		<property name="globalConfig" ref="globalConfig" />
+		<property name="plugins">
+			<array>
+				<!-- 分页插件配置 -->
+				<bean id="paginationInterceptor"
+					class="com.baomidou.mybatisplus.plugins.PaginationInterceptor" />
+				<!-- 乐观锁插件 -->
+				<bean id="optimisticLockerInterceptor"
+					class="com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor">
+				</bean>
+				<!-- 性能拦截器，兼打印sql，不建议生产环境配置 -->
+				<bean id="performanceInterceptor"
+					class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor" />
+			</array>
+		</property>
 	</bean>
-	<bean id="msf" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="sqlSessionFactory" ref="ssf"></property>
-		<property name="basePackage" value="note.dao,readNote.mapper"></property>
-		
+
+	<bean id="mybatisConfig"
+		class="com.baomidou.mybatisplus.MybatisConfiguration">
+		<property name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 部分数据库不识别默认的NULL类型（比如oracle，需要配置该属性 -->
+		<property name="jdbcTypeForNull">
+			<util:constant
+				static-field="org.apache.ibatis.type.JdbcType.NULL" />
+		</property>
 	</bean>
-	
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+	<!-- 定义 MP 全局策略 -->
+	<bean id="globalConfig"
+		class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+		<!-- 逻辑删除 定义下面3个参数 -->
+		<property name="sqlInjector" ref="logicSqlInjector" />
+		<property name="logicDeleteValue" value="-1" />
+		<property name="logicNotDeleteValue" value="1" />
+		<!-- 全局ID类型： 0, "数据库ID自增"， 1, "用户输入ID", 2, "全局唯一ID", 3, "全局唯一ID" -->
+		<property name="idType" value="2" />
+		<!-- 2.1-gamma+ 数据库自动识别，无需配置数据库类型 <property name="dbType" value="mysql" 
+			/> -->
+		<property name="dbType" value="mysql"/>
+		<!-- 2.3+ 全局表前缀 mp_ <property name="tablePrefix" value="mp_" /> -->
+		<!--主键Sequence -->
+		<!-- <property name="keyGenerator" ref="keyGenerator" /> -->
+		<!-- 公共字段填充处理器 -->
+		<!-- <property name="metaObjectHandler" ref="myMetaObjectHandler" /> -->
+		<!--数据库关键字转义符，'desc', "desc" 2.1-gamma+不需要制定 -->
+		<!--<property name="identifierQuote" value="'" /> -->
+	</bean>
+
+	<!-- 配置oracle主键Sequence， 其他类型数据库，请配置相应的类型 -->
+	<!-- <bean id="keyGenerator"
+		class="com.baomidou.mybatisplus.incrementer.OracleKeyGenerator" /> -->
+
+	<!-- 自定义处理器 -->
+	<!-- <bean id="myMetaObjectHandler"
+		class="com.baomidou.test.MyMetaObjectHandler" /> -->
+	<!-- 逻辑删除Sql注入器 -->
+	<bean id="logicSqlInjector"
+		class="com.baomidou.mybatisplus.mapper.LogicSqlInjector" />
+
+	<!-- 配置mybatis 扫描mapper接口的路径, 相当于注解@MapperScan，@MapperScan("com.baomidou.mybatisplus.test.h2.entity.mapper") -->
+	<bean id="mapperScannerConfigurer"
+		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+			value="com.baomidou.mybatisplus.test.h2.entity.mapper,readNote.mapper" />
+	</bean>
+
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
-	<mvc:annotation-driven></mvc:annotation-driven>
-	<mvc:default-servlet-handler></mvc:default-servlet-handler>
+	<mvc:annotation-driven/>
+	<mvc:default-servlet-handler/>
 	
-	<context:component-scan base-package="note.controller"></context:component-scan>	
-	<context:component-scan base-package="note.service"></context:component-scan>
-	<context:component-scan base-package="readNote.controller"></context:component-scan>	
-	<context:component-scan base-package="readNote.service"></context:component-scan>
+	<!-- 原先云笔记的自动扫描 -->
+	<!-- <context:component-scan
+		base-package="note.controller"></context:component-scan>
+	<context:component-scan
+		base-package="note.service"></context:component-scan> -->
+	<context:component-scan
+		base-package="readNote.controller"></context:component-scan>
+	<context:component-scan
+		base-package="readNote.service"></context:component-scan>
 	<context:component-scan base-package="note.aop"></context:component-scan>
-	<aop:aspectj-autoproxy/>  
-	 
+	<aop:aspectj-autoproxy />
 
-	 <!-- 配置事务管理器 -->
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-        >
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="ds"></property>
 	</bean>
-    <!-- 指明使用注解的方式来管理事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 指明使用注解的方式来管理事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 
 
-	 <!-- <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	 	
-	 </bean> -->
-	 
-	 
-	 
+	<!-- <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		</bean> -->
+
+
+
 </beans>

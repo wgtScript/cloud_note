@@ -224,6 +224,15 @@ public class JsonResult<T> implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "JsonResult [state=" + state + ", data=" + data + ", message=" + message + ", rows=" + rows + ", total="
+				+ total + ", statusCode=" + statusCode + ", title=" + title + ", totalPage=" + totalPage
+				+ ", currentPage=" + currentPage + ", numPerPage=" + numPerPage + ", nextPage=" + nextPage
+				+ ", previousPage=" + previousPage + ", firstPage=" + firstPage + ", lastPage=" + lastPage
+				+ ", hasPreviousPage=" + hasPreviousPage + ", hasNextPage=" + hasNextPage + "]";
+	}
+
 	
 
 	

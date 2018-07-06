@@ -29,6 +29,6 @@ public interface ReadNoteService {
 	 * @param id
 	 * @return
 	 */
-	public ReadNote getReadNote(Integer id);
+	public ReadNote getReadNote(Long id);
 	
 }

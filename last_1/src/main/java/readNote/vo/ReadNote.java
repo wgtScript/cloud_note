@@ -2,28 +2,54 @@ package readNote.vo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
+
+@TableName("read_note")
 public class ReadNote implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2113509792155672086L;
-	private int id;
+	@TableId(value = "id_", type = IdType.AUTO)
+	private long id;
+	@TableField("charpter_no")
 	private String chapterNo;//章节号
+	@TableField("teacher_name")
 	private String teacherName;//讲师名
+	@TableField("note_summary")
 	private String noteSummary;//笔记摘要（标题）
+	@TableField("note_content")
 	private String noteContent;//笔记内容
+	@TableField("note_name")
 	private String noteName;//书籍名
-	private String remark;//备注
-	private String enable;//是否可用
-	private String createBy;
-	private String updateBy;
-	private Timestamp createTime;
-	private Timestamp updateTime;
-	public int getId() {
+	
+	
+	@TableField("enable_")
+	private Integer enable;
+	@TableField("remark_")
+	private String remark;
+	@TableField("create_by")
+	private Long createBy;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
+	@TableField("create_time")
+	private Date createTime;
+	@TableField("update_by")
+	private Long updateBy;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") 
+	@TableField("update_time")
+	private Date updateTime;
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getChapterNo() {
@@ -50,49 +76,47 @@ public class ReadNote implements Serializable{
 	public void setNoteContent(String noteContent) {
 		this.noteContent = noteContent;
 	}
+	public String getNoteName() {
+		return noteName;
+	}
+	public void setNoteName(String noteName) {
+		this.noteName = noteName;
+	}
+	public Integer getEnable() {
+		return enable;
+	}
+	public void setEnable(Integer enable) {
+		this.enable = enable;
+	}
 	public String getRemark() {
 		return remark;
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public String getEnable() {
-		return enable;
-	}
-	public void setEnable(String enable) {
-		this.enable = enable;
-	}
-	public String getCreateBy() {
+	public Long getCreateBy() {
 		return createBy;
 	}
-	public void setCreateBy(String createBy) {
+	public void setCreateBy(Long createBy) {
 		this.createBy = createBy;
 	}
-	public String getUpdateBy() {
-		return updateBy;
-	}
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public Timestamp getUpdateTime() {
+	public Long getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(Long updateBy) {
+		this.updateBy = updateBy;
+	}
+	public Date getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
-	}
-	
-	
-	public String getNoteName() {
-		return noteName;
-	}
-	public void setNoteName(String noteName) {
-		this.noteName = noteName;
 	}
 	public ReadNote() {
 		super();
@@ -101,10 +125,11 @@ public class ReadNote implements Serializable{
 	@Override
 	public String toString() {
 		return "ReadNote [id=" + id + ", chapterNo=" + chapterNo + ", teacherName=" + teacherName + ", noteSummary="
-				+ noteSummary + ", noteContent=" + noteContent + ", noteName=" + noteName + ", remark=" + remark
-				+ ", enable=" + enable + ", createBy=" + createBy + ", updateBy=" + updateBy + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + "]";
+				+ noteSummary + ", noteContent=" + noteContent + ", noteName=" + noteName + ", enable=" + enable
+				+ ", remark=" + remark + ", createBy=" + createBy + ", createTime=" + createTime + ", updateBy="
+				+ updateBy + ", updateTime=" + updateTime + "]";
 	}
+	
 	
 	
 	

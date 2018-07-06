@@ -5,7 +5,7 @@
 	<resultMap type="readNote.vo.ReadNote" id="BaseResultMap">
 		<result column="id_" property="id" jdbcType="BIGINT" />
 		
-		<result column="chapter_no" property="chapterNo" jdbcType="VARCHAR" />
+		<result column="charpter_no" property="chapterNo" jdbcType="VARCHAR" />
 		<result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
 		<result column="note_summary" property="noteSummary" jdbcType="VARCHAR" />
 		<result column="note_content" property="noteContent" jdbcType="LONGVARCHAR" />
