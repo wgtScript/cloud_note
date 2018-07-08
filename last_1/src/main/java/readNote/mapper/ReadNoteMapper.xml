@@ -5,12 +5,11 @@
 	<resultMap type="readNote.vo.ReadNote" id="BaseResultMap">
 		<result column="id_" property="id" jdbcType="BIGINT" />
 		
-		<result column="charpter_no" property="chapterNo" jdbcType="VARCHAR" />
+		<result column="chapter_no" property="chapterNo" jdbcType="VARCHAR" />
 		<result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
 		<result column="note_summary" property="noteSummary" jdbcType="VARCHAR" />
 		<result column="note_content" property="noteContent" jdbcType="LONGVARCHAR" />
 		<result column="note_name" property="noteName" jdbcType="VARCHAR" />
-		
 		<result column="create_by" property="createBy" jdbcType="BIGINT" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="update_by" property="updateBy" jdbcType="BIGINT" />
@@ -32,33 +31,19 @@
 			and id_ = #{id}
 		</if>
 		<if test="teacherName!=null and teacherName != ''">
-			and teacher_name like #{teacherName}
+			and teacher_name like  CONCAT('%',#{teacherName},'%')
 		</if>
 		<if test="noteName!=null and noteName != ''">
-			and note_name like #{noteName}
+			and note_name like  CONCAT('%',#{noteName},'%')
 		</if>
 		<if test="noteSummary!=null and noteSummary != ''">
-			and note_summary like #{noteSummary}
+			and note_summary like  CONCAT('%',#{noteSummary},'%')
 		</if>
 		<if test="chapterNo!=null and chapterNo != ''">
-			and chapter_no like #{chapterNo}
+			and chapter_no =  #{chapterNo}
 		</if>
-		<if test="start!=null and start != ''">
-		limit #{start},#{rows}
-		</if>	
 	</select>
 
-	<insert id="addReadNote" parameterType="map">
-		insert into 
-			read_note
-		values( null,
-				#{chapterNo},
-				#{teacherName},
-				#{noteName},
-				#{noteSummary},
-				#{noteContent},
-				null,null,null,null,null,null
-		)
-	</insert>		
+	
 	
 </mapper>

@@ -3,6 +3,8 @@ package readNote.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import readNote.vo.ReadNote;
@@ -13,32 +15,7 @@ public interface ReadNoteMapper extends BaseMapper<ReadNote>{
 	 */
 	public List<ReadNote> getReadNoteList(Map<String,Object> pageInfo);
 	
-	/**
-	 * 添加笔记
-	 * @param readNote 笔记实体
-	 */
-	public int addReadNote(Map<String,Object> readNote);
-	/**
-	 * 删除笔记
-	 * 2018年6月30日 author:wgt
-	 * @param readNoteId 笔记id
-	 * @return
-	 */
-	public int deleteReadNote(int readNoteId);
+	public List<ReadNote> getReadNoteList(RowBounds rows, Map<String,Object> pageInfo);
 	
-	/**
-	 * 获取笔记详情
-	 * 2018年6月30日 author:wgt
-	 * @param readNoteId
-	 * @return
-	 */
-	public ReadNote getReadNote(int readNoteId);
-
-	/**
-	 * 修改笔记
-	 * 2018年6月30日 author:wgt
-	 * @param newReadNote
-	 * @return
-	 */
-	public int updateReadNote(Map<String,Object> newReadNote);
+	
 }

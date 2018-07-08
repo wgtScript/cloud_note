@@ -1,8 +1,8 @@
 <script>
+/*
 var data = $('#productDg').datagrid('getSelected');
 var url="http://127.0.0.1:8081/last_1/getReadNote.do";
 var data={id:data.id};
-/*
 $.ajax({
 	url:url,
 	data:data,
@@ -17,7 +17,7 @@ $.ajax({
 
 </script>
 	<div class="form-group"></div>
-
+		<input type="hidden" name="id"/>
 	<div class="form-group col-sm-11">
 		<label for="noteName" class="col-sm-2 control-label">书名：</label>
 		<div class="col-sm-2">

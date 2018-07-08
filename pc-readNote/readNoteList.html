@@ -25,28 +25,8 @@
     <script type="text/javascript" src="js/topjui.config.js"></script>
 	<!-- TopJUI框架核心-->
     <script type="text/javascript" src="js/topjui.core.min.js"></script>
-    <script>
-		//var url="http://127.0.0.1:8080/last_1/getReadNoteList.do";
-		/*var url="http://192.168.1.232:8081/last_1/getReadNoteList.do";
-		
-		var data={teacherName:"wgt"};
-		var res={};
-		$.ajax({ 
-			url: url,
-			data:data,
-			async:false,
-			dataType:'json',
-			success: function(res){
-				res=res;
-		    },
-		    error:function(XMLHttpRequest, textStatus, errorThrown){
-		    	debugger;
-		    	alert(errorThrown);
-		    }
-		});*/
-	</script>
 	<style>
-		.panel-body {padding: 0;}
+		body.panel-noscroll >div.datagrid > div.panel-body {padding: 0;}
 		.datagrid-cell-rownumber{overflow:visible}
 	</style>
 
@@ -69,6 +49,7 @@
 	           id:'userAddDialog',
 	           title:'新增笔记',
 			   href:'addReadNote.html',
+			   height:'700',
 			   editor:[
 					{id:'contentAddEditor',field:'noteContent'}
 				],
@@ -86,6 +67,8 @@
 				   data-options="id:'noteName',prompt:'书名',width:100">
 			<input type="text" name="noteSummary" data-toggle="topjui-textbox"
 	               data-options="id:'noteSummary',prompt:'内容摘要',width:100">
+	        <input type="text" name="chapterNo" data-toggle="topjui-textbox"
+	               data-options="id:'chapterNo',prompt:'章节号',width:100">
 	        <a href="javascript:void(0)"
 	           data-toggle="topjui-menubutton"
 	           data-options="method:'query',
@@ -109,12 +92,16 @@
 			pagination:true, 
 			fitColumns:true,
 			singleSelect:true,
+			multiSort:true,
+			pageSize:20,
 			columns:[[
-				{field:'id',title:'id',checkbox:true},
-				{field:'chapterNo',title:'序号',width:100},
-				{field:'noteName',title:'书名',width:100},
-				{field:'teacherName',title:'讲师',width:100},
-				{field:'noteSummary',title:'摘要',width:100,align:'right'}
+				{field:'id',title:'uuid',checkbox:true},
+				{field:'noteName',title:'书名',width:100,sortable:true},
+				{field:'chapterNo',title:'章节号',width:50,sortable:true},
+				{field:'teacherName',title:'讲师',width:100,sortable:true},
+				{field:'noteSummary',title:'内容摘要',width:500,align:'left',sortable:true},
+				{field:'createTime',title:'创建时间',width:140,sortable:true,align:'center'},
+				{field:'operate',title:'操作',formatter:operateFormatter,width:80,align:'center'}
 			]]
 		});
 
@@ -126,15 +113,78 @@
             dialog:{
                id:'detailDialog',
                href:'readNoteDetail.html',
+               height:'700',
 			   url:'http://127.0.0.1:8081/last_1/getReadNote2.do?id={id}',
                editor:[
 					{id:'contentAddEditor',field:'noteContent'}
 				],
-               title:'笔记详情',
-               resizable:false,
+               title:'笔记修改',
+               buttonsGroup:[ 
+	               {text:'保存',url:'http://127.0.0.1:8081/last_1/addReadNote.do',iconCls:'fa fa-plus',handler:'ajaxForm',btnCls:'topjui-btn-green'}
+	           ]
+               //resizable:false,
             }
         });
+		function operateFormatter(value, row, index) {
+	        var htmlstr = '<button class="layui-btn layui-btn-xs" onclick="openEditDiag(\'' + row.id + '\')">编辑</button>';
+	        htmlstr += '<button class="layui-btn layui-btn-xs layui-btn-danger" onclick="deleteRow(\'' + row.id + '\')">删除</button>';
+	        return htmlstr;
+	    }
+		
+		function openEditDiag(id) {
+	        var $editDialog = $('<form></form>');
+	        $editDialog.iDialog({
+	            title: '编辑数据',
+	            width: 950,
+	            height: 500,
+	            closed: false,
+	            cache: false,
+	            href: 'readNoteDetail.html?id=' + id,
+	            modal: true,
+	            buttons: [{
+	                text: '保存',
+	                iconCls: 'fa fa-save',
+	                btnCls: 'topjui-btn-blue',
+	                handler: function () {
+	                    // 提示信息
+	                    $.iMessager.alert('操作提示', '请根据具体情况编写代码，如ajax更新请求，请求失败提示，请求成功提示，请求成功后关闭窗口并刷新表格等！', 'messager-info');
+	                }
+	            }, {
+	                text: '关闭',
+	                iconCls: 'fa fa-close',
+	                btnCls: 'topjui-btn-red',
+	                handler: function () {
+	                    $editDialog.iDialog('close');
+	                }
+	            }],
+	            onLoad: function () {
+	                //加载表单数据
+	                $.getJSON('http://127.0.0.1:8081/last_1/getReadNote2.do?id=' + id, function (data) {
+	                    $editDialog.form('load', data);
+	                    /* $editDialog.editor([
+	    					{id:'contentAddEditor',field:'noteContent'}
+	    					]); */
+	                });
+	            }
+	        });
+	    }
 
+	    function deleteRow(id) {
+	    	 $.iMessager.confirm('确认对话框', '确定删除该笔记吗？', function(r){
+    		    if (r){
+    		    	$.ajax({
+    		    		url:'http://127.0.0.1:8081/last_1/deleteReadNote.do',
+    		    		type:'post',
+    		    		data:{id:id},
+    		    		success:function(data){
+		    		    	$.iMessager.alert(data.title,data.message);
+		    		    	$('#productDg').iDatagrid('reload');
+    		    		}
+    		    	});
+    		    } 
+    		});
+	    }
+		
 		
 	</script>
 	<!-- Ueditor编辑器插件 -->

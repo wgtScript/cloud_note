@@ -1,7 +1,6 @@
 package readNote.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +9,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @TableName("read_note")
@@ -20,7 +20,7 @@ public class ReadNote implements Serializable{
 	private static final long serialVersionUID = -2113509792155672086L;
 	@TableId(value = "id_", type = IdType.AUTO)
 	private long id;
-	@TableField("charpter_no")
+	@TableField("chapter_no")
 	private String chapterNo;//章节号
 	@TableField("teacher_name")
 	private String teacherName;//讲师名
@@ -100,6 +100,7 @@ public class ReadNote implements Serializable{
 	public void setCreateBy(Long createBy) {
 		this.createBy = createBy;
 	}
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")  
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -115,6 +116,7 @@ public class ReadNote implements Serializable{
 	public Date getUpdateTime() {
 		return updateTime;
 	}
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")  
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
