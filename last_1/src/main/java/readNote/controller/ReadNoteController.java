@@ -107,8 +107,11 @@ public class ReadNoteController extends BaseController{
 		return map;
 	}
 	@RequestMapping("getNoteName.do")
-	public List<Map<String,Object>> getNoteName(){
-		return readNoteService.getNoteName();
+	public List<Map<String,Object>> getNoteName(String col){
+		if(StringUtils.isNotBlank(col))	{
+			return readNoteService.getNoteName(col);
+		}
+		return null;
 	}
 	
 	

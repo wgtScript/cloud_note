@@ -44,8 +44,9 @@
 		</if>
 	</select>
 
-	<select id="getNoteName" resultType="map">
-		select DISTINCT note_name from read_note
+	<select id="getNoteName" resultType="map" parameterType="string">
+		select DISTINCT ${col}
+		from read_note
 	</select>
 	
 </mapper>

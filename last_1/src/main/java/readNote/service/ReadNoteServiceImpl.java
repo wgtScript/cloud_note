@@ -94,7 +94,7 @@ public class ReadNoteServiceImpl extends BaseService implements ReadNoteService 
 		return readNoteMapper.deleteById(id);
 	}
 
-	public List<Map<String,Object>> getNoteName() {
-		return readNoteMapper.getNoteName();
+	public List<Map<String,Object>> getNoteName(String col) {
+		return readNoteMapper.getNoteName(col);
 	}
 }

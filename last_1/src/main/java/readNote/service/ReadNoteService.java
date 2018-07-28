@@ -40,6 +40,6 @@ public interface ReadNoteService {
 	public int deleteReadNote(Long id);
 	
 	/**获取笔记书名*/
-	public List<Map<String,Object>> getNoteName();
+	public List<Map<String,Object>> getNoteName(String col);
 	
 }
