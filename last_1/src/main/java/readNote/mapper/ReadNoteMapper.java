@@ -17,5 +17,6 @@ public interface ReadNoteMapper extends BaseMapper<ReadNote>{
 	
 	public List<ReadNote> getReadNoteList(RowBounds rows, Map<String,Object> pageInfo);
 	
-	
+	/**获取笔记书名*/
+	public List<Map<String,Object>> getNoteName();
 }

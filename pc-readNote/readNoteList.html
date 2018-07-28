@@ -63,8 +63,11 @@
 	    <form id="queryForm" class="search-box">
 	        <input type="text" name="teacherName" data-toggle="topjui-textbox"
 	               data-options="id:'teacherName',prompt:'讲师',width:100">
-	        <input type="text" name="noteName" data-toggle="topjui-textbox"
-				   data-options="id:'noteName',prompt:'书名',width:100">
+	        <input type="text" name="noteName" data-toggle="topjui-combobox"
+				   data-options="id:'noteName',prompt:'书名',width:200, 
+				   url:'http://127.0.0.1:8081/last_1/getNoteName.do',
+     			   valueField:'note_name',
+   				   textField:'note_name'">
 			<input type="text" name="noteSummary" data-toggle="topjui-textbox"
 	               data-options="id:'noteSummary',prompt:'内容摘要',width:100">
 	        <input type="text" name="chapterNo" data-toggle="topjui-textbox"
@@ -80,8 +83,6 @@
 	</div>
 
 	<script>
-		
-		
 		$('#productDg').iDatagrid({
 			url:'http://127.0.0.1:8081/last_1/getReadNoteList.do',
 			toolbar: '#productDg-toolbar',

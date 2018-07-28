@@ -1,6 +1,7 @@
 package readNote.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -105,5 +106,10 @@ public class ReadNoteController extends BaseController{
 		map.put("title", "操作提示");
 		return map;
 	}
-
+	@RequestMapping("getNoteName.do")
+	public List<Map<String,Object>> getNoteName(){
+		return readNoteService.getNoteName();
+	}
+	
+	
 }

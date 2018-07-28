@@ -10,6 +10,8 @@
 	<properties>
 		<!-- 设置默认编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<log4j.version>1.2.17</log4j.version>
 	</properties>
 
 	<!-- 如果不添加此配置，mybatis的mapper.xml文件都会被漏掉 -->
@@ -51,7 +53,15 @@
 		</plugins>
 	</build>
 
+	
+
 	<dependencies>
+		<!-- 日志文件管理包 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
