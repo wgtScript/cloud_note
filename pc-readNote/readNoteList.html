@@ -8,7 +8,8 @@
     <link type="text/css" href="css/topjui.blue.css" rel="stylesheet" id="dynamicTheme"/>
     <!-- FontAwesome字体图标 -->
     <link type="text/css" href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
-
+	<!-- TopJUI中文支持 -->
+    <script type="text/javascript" src="js/locale/topjui.lang.zh_CN.js"></script>
     <!-- layui框架样式 -->
     <link type="text/css" href="css/layui.css" rel="stylesheet"/>
 	
@@ -49,7 +50,8 @@
 	           id:'userAddDialog',
 	           title:'新增笔记',
 			   href:'addReadNote.html',
-			   height:'700',
+			   height:'90%',
+			   width:'80%',
 			   editor:[
 					{id:'contentAddEditor',field:'noteContent'}
 				],
@@ -103,8 +105,8 @@
 			columns:[[
 				{field:'id',title:'uuid',checkbox:true},
 				{field:'noteName',title:'书名',width:100,sortable:true},
-				{field:'chapterNo',title:'章节号',width:50,sortable:true},
-				{field:'teacherName',title:'讲师',width:100,sortable:true},
+				{field:'chapterNo',title:'章节号',width:80,sortable:true},
+				{field:'teacherName',title:'讲师',width:80,sortable:true},
 				{field:'noteSummary',title:'内容摘要',width:500,align:'left',sortable:true},
 				{field:'createTime',title:'创建时间',width:140,sortable:true,align:'center'},
 				{field:'operate',title:'操作',formatter:operateFormatter,width:80,align:'center'}
@@ -119,7 +121,8 @@
             dialog:{
                id:'detailDialog',
                href:'readNoteDetail.html',
-               height:'700',
+               height:'90%',
+               width:'80%',
 			   url:'http://127.0.0.1:8081/last_1/getReadNote2.do?id={id}',
                editor:[
 					{id:'contentAddEditor',field:'noteContent'}
@@ -132,12 +135,11 @@
             }
         });
 		function operateFormatter(value, row, index) {
-	        var htmlstr = '<button class="layui-btn layui-btn-xs" onclick="openEditDiag(\'' + row.id + '\')">编辑</button>';
-	        htmlstr += '<button class="layui-btn layui-btn-xs layui-btn-danger" onclick="deleteRow(\'' + row.id + '\')">删除</button>';
+	        var htmlstr = '<button class="layui-btn layui-btn-xs layui-btn-danger" onclick="deleteRow(\'' + row.id + '\')">删除</button>';
 	        return htmlstr;
 	    }
 		
-		function openEditDiag(id) {
+		/* function openEditDiag(id) {
 	        var $editDialog = $('<form></form>');
 	        $editDialog.iDialog({
 	            title: '编辑数据',
@@ -167,13 +169,11 @@
 	                //加载表单数据
 	                $.getJSON('http://127.0.0.1:8081/last_1/getReadNote2.do?id=' + id, function (data) {
 	                    $editDialog.form('load', data);
-	                    /* $editDialog.editor([
-	    					{id:'contentAddEditor',field:'noteContent'}
-	    					]); */
+	                   
 	                });
 	            }
 	        });
-	    }
+	    } */
 
 	    function deleteRow(id) {
 	    	 $.iMessager.confirm('确认对话框', '确定删除该笔记吗？', function(r){
