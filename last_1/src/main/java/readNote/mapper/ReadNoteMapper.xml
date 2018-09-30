@@ -45,8 +45,7 @@
 	</select>
 
 	<select id="getNoteName" resultType="map" parameterType="string">
-		select DISTINCT ${col}
-		from read_note
+		select DISTINCT ${col} from read_note
 	</select>
 	
 </mapper>
