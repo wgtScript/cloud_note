@@ -1,4 +1,9 @@
 /target/
 .classpath
 .project
-.settings/ 
+.settings/
+nginx-1.9.12/ 
+nginx-1.9.12/*
+/nginx-1.9.12/
+*.bat
+logs/

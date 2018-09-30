@@ -21,7 +21,7 @@ if %ERRORLEVEL% == 0 (
 	rem nginx -s stop
 	TASKKILL /F /IM nginx.exe /T
 	echo "stop ok"
-
+	
 :start_nginx
 	echo "nginx is not running, starting"
 	start "nginx" "nginx.exe"
