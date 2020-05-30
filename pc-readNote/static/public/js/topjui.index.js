@@ -1,7 +1,7 @@
 // 首页加载完后，取消加载中状态
-$(window).load(function () {
-    $("#loading").fadeOut();
-});
+//$(window).load(function () {
+//    $("#loading").fadeOut();
+//});
 var isFullScreen = false;
 
 var App = function () {
@@ -144,7 +144,7 @@ $(function () {
     //generateMenu(1325, "系统配置");
 
     // 显示系统首页
-    /*setTimeout(function () {
+   /* setTimeout(function () {
      var indexTab = [];
      indexTab.iconCls = "icon-house";
      indexTab.text = "系统门户";
@@ -355,53 +355,50 @@ function generateMenu(menuId, systemName) {
                 $("#RightAccordion").iAccordion('remove', 0);
             }
         }
-
-        var url = "./json/menu/menu_" + menuId + ".json";
-        $.get(
-            url, {"levelId": "2"}, // 获取第一层目录
-            function (data) {
-                if (data == "0") {
-                    window.location = "/Account";
+        var data=[
+        	  {"id": 2,"pid": 1,"state": "open","iconCls": "","text": "topjuiDemo","url": ""},
+//        	  {"id": 3,"pid": 1,"state": "open","iconCls": "","text": "打开弹出窗口2","url": "./html/menu/openDialog_index.html"},
+    		];
+        $.each(data, function (i, e) {// 循环创建手风琴的项
+            var pid = e.pid;
+            var isSelected = i == 0 ? true : false;
+            $('#RightAccordion').iAccordion('add', {
+                fit: false,
+                title: e.text,
+                content: "<ul id='tree" + e.id + "' ></ul>",
+                border: false,
+                selected: isSelected,
+                iconCls: e.iconCls
+            });
+            //$.parser.parse();
+            var data2=[
+          	  {"id": 3,"pid": 2,"state": "open","iconCls": "","text": "toolbar2","url": "toolbar2.html"},
+          	  {"id": 3,"pid": 2,"state": "open","iconCls": "","text": "tooltip","url": "tooltip.html"},
+      		];
+            $("#tree" + e.id).tree({
+                data: data2,
+                lines: false,
+                animate: true,
+                onBeforeExpand: function (node, param) {
+//                    $("#tree" + e.id).tree('options').url = "./json/menu/menu_" + node.id + ".json";
+                },
+                onClick: function (node) {
+                    if (node.url) {
+                        /*if(typeof node.attributes != "object") {
+                         node.attributes = $.parseJSON(node.attributes);
+                         }*/
+                        addTab(node);
+                    } else {
+                        if (node.state == "closed") {
+                            $("#tree" + e.id).tree('expand', node.target);
+                        } else if (node.state == 'open') {
+                            $("#tree" + e.id).tree('collapse', node.target);
+                        }
+                    }
                 }
-                $.each(data, function (i, e) {// 循环创建手风琴的项
-                    var pid = e.pid;
-                    var isSelected = i == 0 ? true : false;
-                    $('#RightAccordion').iAccordion('add', {
-                        fit: false,
-                        title: e.text,
-                        content: "<ul id='tree" + e.id + "' ></ul>",
-                        border: false,
-                        selected: isSelected,
-                        iconCls: e.iconCls
-                    });
-                    //$.parser.parse();
-                    $.get("./json/menu/menu_" + e.id + ".json", function (data) {// 循环创建树的项
-                        $("#tree" + e.id).tree({
-                            data: data,
-                            lines: false,
-                            animate: true,
-                            onBeforeExpand: function (node, param) {
-                                $("#tree" + e.id).tree('options').url = "./json/menu/menu_" + node.id + ".json";
-                            },
-                            onClick: function (node) {
-                                if (node.url) {
-                                    /*if(typeof node.attributes != "object") {
-                                     node.attributes = $.parseJSON(node.attributes);
-                                     }*/
-                                    addTab(node);
-                                } else {
-                                    if (node.state == "closed") {
-                                        $("#tree" + e.id).tree('expand', node.target);
-                                    } else if (node.state == 'open') {
-                                        $("#tree" + e.id).tree('collapse', node.target);
-                                    }
-                                }
-                            }
-                        });
-                    }, 'json');
-                });
-            }, "json"
-        );
+            });
+        });
+        
     }
 }
 
